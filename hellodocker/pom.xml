@@ -131,10 +131,8 @@
 								<phase>package</phase>
 								<goals>
 									<goal>run</goal>
+									<goal>stop</goal>
 								</goals>
-								<configuration>
-									<containerName>java-hello-world</containerName>
-								</configuration>
 							</execution>
 						</executions>
 					</plugin>
