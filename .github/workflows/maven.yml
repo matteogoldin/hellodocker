@@ -27,4 +27,4 @@ jobs:
 
     - name: Build with Maven
       run: mvn verify -Pdocker
-      working-directory: com.example.hellodocker
+      working-directory: hellodocker
