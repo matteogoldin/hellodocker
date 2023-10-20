@@ -99,54 +99,6 @@
 					<plugin>
 						<groupId>io.fabric8</groupId>
 						<artifactId>docker-maven-plugin</artifactId>
-						<version>0.43.4</version> <!-- Use the latest version -->
-						<configuration>
-							<!-- Docker build -->
-							<images>
-								<image>
-									<name>java-hello-world</name>
-									<build>
-										<contextDir>${project.basedir}</contextDir>
-									</build>
-									<run>
-										<entryPoint>
-											<arg>java</arg>
-											<arg>-jar</arg>
-											<arg>/app/app.jar</arg>
-										</entryPoint>
-									</run>
-								</image>
-							</images>
-						</configuration>
-						<executions>
-							<execution>
-								<id>docker-build-image</id>
-								<phase>package</phase>
-								<goals>
-									<goal>build</goal>
-								</goals>
-							</execution>
-							<execution>
-								<id>docker-run-container</id>
-								<phase>package</phase>
-								<goals>
-									<goal>run</goal>
-									<goal>stop</goal>
-								</goals>
-							</execution>
-						</executions>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-
-		<profile>
-			<id>docker2</id>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>io.fabric8</groupId>
-						<artifactId>docker-maven-plugin</artifactId>
 						<version>0.43.4</version>
 						<configuration>
 							<showLogs>true</showLogs>
@@ -157,12 +109,6 @@
 									<build>
 										<contextDir>${project.basedir}</contextDir>
 									</build>
-									<run>
-										<wait>
-											<log>Hello World!</log>
-											<time>15000</time>
-										</wait>
-									</run>
 								</image>
 							</images>
 						</configuration>
