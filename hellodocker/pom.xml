@@ -109,6 +109,12 @@
 									<build>
 										<contextDir>${project.basedir}</contextDir>
 									</build>
+									<run>
+										<wait>
+											<log>Hello World!</log>
+											<time>10000</time>
+										</wait>
+									</run>
 								</image>
 							</images>
 						</configuration>
