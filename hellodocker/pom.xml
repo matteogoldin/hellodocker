@@ -14,56 +14,6 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
-	<profiles>
-		<profile>
-			<id>docker</id>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>io.fabric8</groupId>
-						<artifactId>docker-maven-plugin</artifactId>
-						<version>0.34.1</version>
-						<configuration>
-							<showLogs>true</showLogs>
-							<verbose>build</verbose>
-							<images>
-								<image>
-									<name>java-hello-java</name>
-									<build>
-										<contextDir>${project.basedir}</contextDir>
-									</build>
-									<run>
-										<wait>
-											<log>Hello World!</log>
-											<time>15000</time>
-										</wait>
-									</run>
-								</image>
-							</images>
-						</configuration>
-						<executions>
-							<execution>
-								<id>docker-build-image</id>
-								<phase>package</phase>
-								<goals>
-									<goal>build</goal>
-								</goals>
-							</execution>
-							<execution>
-								<id>docker-verify</id>
-								<phase>verify</phase>
-								<goals>
-									<goal>start</goal>
-									<goal>stop</goal>
-								</goals>
-							</execution>
-						</executions>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-	</profiles>
-
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
@@ -139,4 +89,59 @@
 			</plugin>
 		</plugins>
 	</reporting>
+
+
+	<profiles>
+    <profile>
+      <id>docker</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>io.fabric8</groupId>
+            <artifactId>docker-maven-plugin</artifactId>
+            <version>0.40.2</version>
+            <configuration>
+              <showLogs>true</showLogs>
+              <images>
+                <image>
+                  <name>java-hello-java</name>
+                  <build>
+                    <contextDir>${project.basedir}</contextDir>
+                    <args>
+                      <jarToCopy>${project.artifactId}-${project.version}.jar</jarToCopy>
+                    </args>
+                  </build>
+                  <run>
+                    <wait>
+                      <log>Hello World!</log>
+                      <time>10000</time>
+                    </wait>
+                  </run>
+                </image>
+              </images>
+            </configuration>
+            <executions>
+              <execution>
+                <id>docker-build-image</id>
+                <phase>package</phase>
+                <goals>
+                  <goal>build</goal>
+                </goals>
+              </execution>
+              <execution>
+                <id>docker-verify</id>
+                <phase>verify</phase>
+                <goals>
+                  <goal>start</goal>
+                  <goal>stop</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+
+
 </project>
